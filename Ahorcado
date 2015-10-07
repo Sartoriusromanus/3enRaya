@@ -1,5 +1,3 @@
-package ahorcado;
-
 import java.awt.*;
 import javax.swing.*;
 
@@ -7,12 +5,20 @@ import javax.swing.*;
  *
  * @author angelluis
  */
-public class Ahorcado extends JFrame{
-  Panel pnlMonigote,pnlLetras,pnlLineas,pnlFallos,pnlResultado;
+public class Ahorcado extends Frame{
+  
+  private int x=100;
+  private int y=700;
     public Ahorcado(){
         setSize(900,800);
         setLayout(null);
+        Controlador control=new Controlador();
+        addKeyListener(control);
+        setVisible(true);
         
+        
+        
+        /*
         //Panel del monigote
         pnlMonigote=new Panel();
         pnlMonigote.setBounds(0, 0, 700, 600);
@@ -28,6 +34,7 @@ public class Ahorcado extends JFrame{
         pnlLineas=new Panel();
         pnlLineas.setBackground(Color.pink);
         pnlResultado.add(pnlLineas);
+        
         add(pnlResultado);
         
         //Panel derecho para las letras falladas
@@ -35,8 +42,44 @@ public class Ahorcado extends JFrame{
         pnlFallos.setBackground(Color.red);
         add(pnlFallos);
         pnlFallos.setBounds(700, 0, 200,900);
+        */
+       
+    }
+    
+  @Override
+    public void paint(Graphics g){
         
-        setVisible(true);
+       g.setColor(Color.BLACK);
+       //Para pintar las lineas
+       for(int i=0;i<5;i++) {
+        g.drawLine(x,y,x+60,y);
+        x=x+100;
+       }
+
+       //PINTAR HORCA
+        g.drawLine(100, 100, 100, 500);//horizontal
+        g.drawLine(100, 100, 350, 100);//vertical
+        g.drawLine(100, 150, 150, 100);//cruz
+        g.drawLine(40, 500, 250, 500);//suelo
+        g.drawLine(350, 100, 350, 200);//soga
+        g.drawOval(330, 200, 50, 50);//cabeza
+        g.drawLine(350, 250, 350, 350);//cuerpo
+        g.drawLine(300, 280, 400, 280);//brazos
+        g.drawLine(350, 350, 300, 400);//pierna izq
+        g.drawLine(350, 350, 400, 400);//pierna der
+        g.drawString("X", 345, 230);//ojo
+        g.drawString("X", 365, 230);//ojo
+        g.drawLine(349, 240, 361, 240);//boca
+       
+        //Para pintar las letras
+       g.setFont(new Font(null,Font.BOLD,50));
+       g.drawString("c", 125, y-10);
+       
+       //Para pintar las falladas
+       g.setFont(new Font(null,Font.ITALIC,30));
+       g.drawString("c", 800, 125);
+
+        
     }
     
     public static void main(String[] args) {
