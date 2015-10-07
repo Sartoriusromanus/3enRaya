@@ -1,5 +1,18 @@
 
-asdasdasdasda
-
-ahhhhhhhhhhhh
-HOLAAAAAAAA
+@Override
+    public void paint(Graphics g){
+        //PINTAR HORCA
+        g.drawLine(100, 100, 100, 500);//horizontal
+        g.drawLine(100, 100, 350, 100);//vertical
+        g.drawLine(100, 150, 150, 100);//cruz
+        g.drawLine(40, 500, 250, 500);//suelo
+        g.drawLine(350, 100, 350, 200);//soga
+        g.drawOval(330, 200, 50, 50);//cabeza
+        g.drawLine(350, 250, 350, 350);//cuerpo
+        g.drawLine(300, 280, 400, 280);//brazos
+        g.drawLine(350, 350, 300, 400);//pierna izq
+        g.drawLine(350, 350, 400, 400);//pierna der
+        g.drawString("X", 345, 230);//ojo
+        g.drawString("X", 365, 230);//ojo
+        g.drawLine(349, 240, 361, 240);//boca
+    }
