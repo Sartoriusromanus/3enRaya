@@ -1,0 +1,43 @@
+import java.awt.*;
+import javax.swing.*;
+
+/**
+ *
+ * @author angelluis
+ */
+public class Ahorcado extends JFrame{
+  Panel pnlMonigote,pnlLetras,pnlLineas,pnlFallos,pnlResultado;
+    public Ahorcado(){
+        setSize(900,800);
+        setLayout(null);
+        pnlMonigote=new Panel();
+        pnlMonigote.setBounds(0, 0, 700, 600);
+        pnlMonigote.setBackground(Color.yellow);
+        add(pnlMonigote);
+        
+        pnlResultado=new Panel(new GridLayout(0,1));
+        
+        pnlLetras=new Panel();
+        pnlResultado.setBounds(0, 600, 900,200);
+        pnlLetras.setBackground(Color.green);
+        pnlResultado.add(pnlLetras);
+        
+        pnlLineas=new Panel();
+        pnlLineas.setBackground(Color.pink);
+        pnlResultado.add(pnlLineas);
+        
+        add(pnlResultado);
+        
+        pnlFallos=new Panel();
+        pnlFallos.setBackground(Color.red);
+        add(pnlFallos);
+        pnlFallos.setBounds(700, 0, 200,900);
+        
+        setVisible(true);
+    }
+    
+    public static void main(String[] args) {
+        Ahorcado a=new Ahorcado();
+    }
+    
+}
