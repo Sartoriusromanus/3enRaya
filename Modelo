@@ -1,0 +1,15 @@
+package ahorcado;
+
+/**
+ *
+ * @author angelluis
+ */
+public class Modelo {
+    private String[] cosas={"casa","coche","cometa"};
+    
+    public String getCosas(){
+        
+        return cosas[(int) (Math.random() * cosas.length)];
+    }
+    
+}
