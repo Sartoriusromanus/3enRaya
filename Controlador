@@ -1,4 +1,37 @@
 
-cribo yo
-ESTOY EDITANDO el de carlos
-asdasd
+package ahorcado;
+
+import java.awt.event.KeyEvent;
+import java.awt.event.KeyListener;
+
+/**
+ *
+ * @author angelluis
+ */
+public class Controlador implements KeyListener{
+    private Modelo modelo=new Modelo();
+    @Override
+    public void keyTyped(KeyEvent ke) {
+        
+    }
+
+    @Override
+    public void keyPressed(KeyEvent ke) {
+        procesar(ke.getKeyChar(),modelo.getCosas());
+    }
+
+    @Override
+    public void keyReleased(KeyEvent ke) {
+        
+    }
+
+   public void procesar(char c,String cadena){
+      int n=cadena.indexOf(c);
+       if(n>=0)
+           System.out.println("Esta");
+       else
+           System.out.println("No lo encontro");
+       
+   }
+    
+}
