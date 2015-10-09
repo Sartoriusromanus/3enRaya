@@ -1,18 +1,20 @@
+package ahorcado;
+
 import java.awt.*;
-import javax.swing.*;
+
 
 /**
  *
  * @author angelluis
  */
 public class Ahorcado extends Frame{
-  
-  private int x=100;
+  private Controlador control;
+  private int x=100,numero=0;
   private int y=700;
     public Ahorcado(){
         setSize(900,800);
         setLayout(null);
-        Controlador control=new Controlador();
+        control=new Controlador(this);
         addKeyListener(control);
         setVisible(true);
         
@@ -50,30 +52,45 @@ public class Ahorcado extends Frame{
     public void paint(Graphics g){
         
        g.setColor(Color.BLACK);
-       //Para pintar las lineas
-       for(int i=0;i<5;i++) {
-        g.drawLine(x,y,x+60,y);
-        x=x+100;
+       
+       //Para pinta las lineas
+       for(int i=0;i<control.getLenght();i++){
+         numero=control.coordenadas(i);
+         g.drawLine(x+numero, y, x+60+numero, y);
+         
        }
-
+      
        //PINTAR HORCA
         g.drawLine(100, 100, 100, 500);//horizontal
         g.drawLine(100, 100, 350, 100);//vertical
         g.drawLine(100, 150, 150, 100);//cruz
         g.drawLine(40, 500, 250, 500);//suelo
         g.drawLine(350, 100, 350, 200);//soga
-        g.drawOval(330, 200, 50, 50);//cabeza
-        g.drawLine(350, 250, 350, 350);//cuerpo
-        g.drawLine(300, 280, 400, 280);//brazos
-        g.drawLine(350, 350, 300, 400);//pierna izq
-        g.drawLine(350, 350, 400, 400);//pierna der
-        g.drawString("X", 345, 230);//ojo
-        g.drawString("X", 365, 230);//ojo
-        g.drawLine(349, 240, 361, 240);//boca
+        
+        //Dibuja las fases del muñeco segun el numero de errores
+        switch(control.getError()){
+            case 0:
+              g.drawLine(350, 350, 300, 400);//pierna izq
+              g.drawLine(350, 350, 400, 400);//pierna der 
+            case 1:
+              g.drawLine(300, 280, 400, 280);//brazos 
+            case 2:
+              g.drawLine(350, 250, 350, 350);//cuerpo   
+            case 3:
+              g.drawOval(330, 200, 50, 50);//cabeza
+              g.drawString("X", 345, 230);//ojo
+              g.drawString("X", 365, 230);//ojo
+              g.drawLine(349, 240, 361, 240);//boca   
+        }
+                
+        
+        
        
         //Para pintar las letras
+       
        g.setFont(new Font(null,Font.BOLD,50));
-       g.drawString("c", 125, y-10);
+       for(int i=0;i<control.getAcertadas().length;i++)
+          g.drawString(Character.toString(control.getAcertadas()[i]), control.coordenadas(i)+110, y-10);
        
        //Para pintar las falladas
        g.setFont(new Font(null,Font.ITALIC,30));
@@ -81,6 +98,8 @@ public class Ahorcado extends Frame{
 
         
     }
+    
+  
     
     public static void main(String[] args) {
         Ahorcado a=new Ahorcado();
