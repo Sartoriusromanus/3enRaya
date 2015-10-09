@@ -1,6 +1,6 @@
-
 package ahorcado;
 
+import java.awt.Graphics;
 import java.awt.event.KeyEvent;
 import java.awt.event.KeyListener;
 
@@ -10,6 +10,15 @@ import java.awt.event.KeyListener;
  */
 public class Controlador implements KeyListener{
     private Modelo modelo=new Modelo();
+    private Ahorcado ventana;
+    private Graphics g;
+    private int error=4;
+    private String cadena=modelo.getCosas();
+    private char letra;
+    private char[] acertadas=new char[cadena.length()];
+    public Controlador(Ahorcado v){
+       ventana=v; 
+    }
     @Override
     public void keyTyped(KeyEvent ke) {
         
@@ -17,7 +26,8 @@ public class Controlador implements KeyListener{
 
     @Override
     public void keyPressed(KeyEvent ke) {
-        procesar(ke.getKeyChar(),modelo.getCosas());
+        letra=ke.getKeyChar();
+        procesar(letra,cadena);
     }
 
     @Override
@@ -26,12 +36,49 @@ public class Controlador implements KeyListener{
     }
 
    public void procesar(char c,String cadena){
-      int n=cadena.indexOf(c);
-       if(n>=0)
-           System.out.println("Esta");
-       else
+      int n=cadena.indexOf(c),n2;
+       if(n>=0){
+           System.out.println("Encontrado");
+           acertadas[n]=c;
+           n2=cadena.indexOf(cadena, n);
+           while(n2>0){
+                if(n2>=1){
+                  System.out.println("Encontrado 2ª");
+                  acertadas[n2]=c;
+              }
+             //Para leer apartir del indice anterior por si hubiera alguna mas
+              n2=cadena.indexOf(cadena, n2);
+           }
+       }         
+       else{
            System.out.println("No lo encontro");
-       
+           error--;
+       }
+       System.out.println(error);
+       ventana.repaint();
    }
+
+    public int getError() {
+        return error;
+    }
+   
+    public int coordenadas(int num){
+        return num*100;
+    }
     
+    public int getLenght(){
+        return cadena.length();
+    }
+    
+    public int getIndex(char c){
+       return cadena.indexOf(c); 
+    }
+    
+    public char getLetra(){
+       return letra; 
+    }
+    
+    public char[] getAcertadas(){
+        return acertadas;
+    }
 }
