@@ -5,7 +5,7 @@ package ahorcado;
  * @author angelluis
  */
 public class Modelo {
-    private String[] cosas={"casa","coche","cometa"};
+    private String[] cosas={"casa","coche","cometa","cdcd"};
     
     public String getCosas(){
         
