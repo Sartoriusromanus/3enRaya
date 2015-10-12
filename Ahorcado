@@ -1,3 +1,8 @@
+/*
+ * To change this license header, choose License Headers in Project Properties.
+ * To change this template file, choose Tools | Templates
+ * and open the template in the editor.
+ */
 package ahorcado;
 
 import java.awt.*;
@@ -12,14 +17,47 @@ public class Ahorcado extends Frame{
   private int x=100,numero=0;
   private int y=700;
     public Ahorcado(){
+        setTitle("Juego del Ahorcado");
         setSize(900,800);
         setLayout(null);
+        setLocationRelativeTo(null);
         control=new Controlador(this);
         addKeyListener(control);
         setVisible(true);
-        
+        setResizable(false);
        
     }
+    public Ahorcado (int n){//Inicio constructor ventana extra
+        setLayout(null);
+        Label txtFin ;
+        setLocationRelativeTo(null);
+        if(n>0){
+        txtFin = new Label("Has Ganado");
+        }       
+        else{
+        txtFin = new Label("Has Perdido");
+        }
+        txtFin.setBounds(50,15, 120,30);
+        txtFin.setFont(new Font(null, Font.BOLD | Font.ITALIC,18));
+        add(txtFin);
+        
+        
+        Button btnSalir = new Button("Salir");
+        Button btnJugar = new Button("Jugar");
+        
+        btnSalir.setBounds(30, 60, 60, 30);
+        btnJugar.setBounds(120, 60, 60, 30);
+        
+        
+        add(btnSalir);
+        add(btnJugar);
+        
+        //Atributos ventana
+        setSize(220,180);
+        setVisible(true);
+        setResizable(false);
+
+    }//Fin Metodo Ventana extra
     
   @Override
     public void paint(Graphics g){
