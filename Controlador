@@ -1,6 +1,6 @@
 package ahorcado;
 
-import java.awt.Graphics;
+
 import java.awt.event.KeyEvent;
 import java.awt.event.KeyListener;
 
@@ -11,7 +11,6 @@ import java.awt.event.KeyListener;
 public class Controlador implements KeyListener{
     private Modelo modelo=new Modelo();
     private Ahorcado ventana;
-    private Graphics g;
     private int error=4,ne=0;
     private String cadena=modelo.getCosas();
     private char letra;
@@ -38,26 +37,25 @@ public class Controlador implements KeyListener{
 
    public void procesar(char c,String cadena){
       int n=cadena.indexOf(c),n2;
-       if(n>=0){
-           System.out.println("Encontrado");
+      //Si acierta almacenamos en acertadas
+       if(n!=-1){
            acertadas[n]=c;
-           n2=cadena.indexOf(cadena, n);
-           while(n2>0){
-                if(n2>=1){
-                  System.out.println("Encontrado 2ª");
-                  acertadas[n2]=c;
-              }
-             //Para leer apartir del indice anterior por si hubiera alguna mas
-              n2=cadena.indexOf(cadena, n2);
-           }
+           //Por si hay letras repetidas en la palabra
+           n2=cadena.indexOf(c, n+1);
+           while(n2>-1){
+	      
+              acertadas[n2]=c;
+              n2=cadena.indexOf(c, n2+1);
+              
+           } 
        }         
        else{
-           System.out.println("No lo encontro");
+           //Si falla lo almacenamos en falladas
            falladas[ne]=c;
            ne++;
            error--;
        }
-       System.out.println(error);
+       
        ventana.repaint();
    }
 
@@ -72,15 +70,7 @@ public class Controlador implements KeyListener{
     public int getLenght(){
         return cadena.length();
     }
-    
-    public int getIndex(char c){
-       return cadena.indexOf(c); 
-    }
-    
-    public char getLetra(){
-       return letra; 
-    }
-    
+
     public char[] getAcertadas(){
         return acertadas;
     }
