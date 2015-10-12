@@ -18,33 +18,6 @@ public class Ahorcado extends Frame{
         addKeyListener(control);
         setVisible(true);
         
-        
-        
-        /*
-        //Panel del monigote
-        pnlMonigote=new Panel();
-        pnlMonigote.setBounds(0, 0, 700, 600);
-        pnlMonigote.setBackground(Color.yellow);
-        add(pnlMonigote);
-        
-        //Panel del Sur para las letras y las lineas
-        pnlResultado=new Panel(new GridLayout(0,1));
-        pnlLetras=new Panel();
-        pnlResultado.setBounds(0, 600, 900,200);
-        pnlLetras.setBackground(Color.green);
-        pnlResultado.add(pnlLetras);
-        pnlLineas=new Panel();
-        pnlLineas.setBackground(Color.pink);
-        pnlResultado.add(pnlLineas);
-        
-        add(pnlResultado);
-        
-        //Panel derecho para las letras falladas
-        pnlFallos=new Panel();
-        pnlFallos.setBackground(Color.red);
-        add(pnlFallos);
-        pnlFallos.setBounds(700, 0, 200,900);
-        */
        
     }
     
@@ -94,7 +67,8 @@ public class Ahorcado extends Frame{
        
        //Para pintar las falladas
        g.setFont(new Font(null,Font.ITALIC,30));
-       g.drawString("c", 800, 125);
+       for(int i=0;i<control.getFalladas().length;i++)
+         g.drawString(Character.toString(control.getFalladas()[i]), control.coordenadas(i)+650,y-500);
 
         
     }
