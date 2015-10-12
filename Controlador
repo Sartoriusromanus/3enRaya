@@ -12,10 +12,11 @@ public class Controlador implements KeyListener{
     private Modelo modelo=new Modelo();
     private Ahorcado ventana;
     private Graphics g;
-    private int error=4;
+    private int error=4,ne=0;
     private String cadena=modelo.getCosas();
     private char letra;
     private char[] acertadas=new char[cadena.length()];
+    private char[] falladas=new char[4];
     public Controlador(Ahorcado v){
        ventana=v; 
     }
@@ -52,6 +53,8 @@ public class Controlador implements KeyListener{
        }         
        else{
            System.out.println("No lo encontro");
+           falladas[ne]=c;
+           ne++;
            error--;
        }
        System.out.println(error);
@@ -80,5 +83,9 @@ public class Controlador implements KeyListener{
     
     public char[] getAcertadas(){
         return acertadas;
+    }
+    
+    public char[] getFalladas(){
+        return falladas;
     }
 }
