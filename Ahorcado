@@ -37,7 +37,7 @@ public class Ahorcado extends Frame{
         else{
         txtFin = new Label("Has Perdido");
         }
-        txtFin.setBounds(50,15, 120,30);
+        txtFin.setBounds(50,40, 120,30);
         txtFin.setFont(new Font(null, Font.BOLD | Font.ITALIC,18));
         add(txtFin);
         
@@ -45,15 +45,19 @@ public class Ahorcado extends Frame{
         Button btnSalir = new Button("Salir");
         Button btnJugar = new Button("Jugar");
         
-        btnSalir.setBounds(30, 60, 60, 30);
-        btnJugar.setBounds(120, 60, 60, 30);
+        btnJugar.setBounds(30, 80, 60, 30);
+        btnSalir.setBounds(120, 80, 60, 30);
+        
+        Controlador controlBotones = new Controlador(this); 
+        btnJugar.addActionListener(controlBotones);
+        btnSalir.addActionListener(controlBotones);
         
         
         add(btnSalir);
         add(btnJugar);
         
         //Atributos ventana
-        setSize(220,180);
+        setSize(220,150);
         setVisible(true);
         setResizable(false);
 
