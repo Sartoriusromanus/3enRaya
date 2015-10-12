@@ -1,0 +1,47 @@
+
+package pruebaventana;
+
+import java.awt.*;
+import javax.swing.*;
+
+public class PruebaVentana extends JFrame{
+    
+        public PruebaVentana (int n){//Inicio constructor ventana extra
+        setLayout(null);
+        Label txtFin ;
+        
+        if(n>0){
+        txtFin = new Label("Has Ganado");
+        }       
+        else{
+        txtFin = new Label("Has Perdido");
+        }
+        txtFin.setBounds(50,15, 120,30);
+        txtFin.setFont(new Font(null, Font.BOLD | Font.ITALIC,18));
+        add(txtFin);
+        
+        
+        Button btnSalir = new Button("Salir");
+        Button btnJugar = new Button("Jugar");
+        
+        btnSalir.setBounds(30, 60, 60, 30);
+        btnJugar.setBounds(120, 60, 60, 30);
+        
+        
+        add(btnSalir);
+        add(btnJugar);
+        
+        //Atributos ventana
+        setSize(220,150);
+        setVisible(true);
+        setResizable(false);
+
+    }//Fin Metodo Ventana extra
+
+    public static void main(String[] args) {
+        
+        PruebaVentana ventanaextra = new PruebaVentana(3);
+       
+    }
+    
+}
