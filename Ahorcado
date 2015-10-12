@@ -34,11 +34,12 @@ public class Ahorcado extends Frame{
        }
       
        //PINTAR HORCA
-        g.drawLine(100, 100, 100, 500);//horizontal
-        g.drawLine(100, 100, 350, 100);//vertical
+        g.drawLine(100, 100, 100, 550);//VERTICALL
+        g.drawLine(100, 100, 350, 100);//HORIZONTAL
         g.drawLine(100, 150, 150, 100);//cruz
-        g.drawLine(40, 500, 250, 500);//suelo
+        g.drawLine(40, 550, 250, 550);//suelo
         g.drawLine(350, 100, 350, 200);//soga
+              
         
         //Dibuja las fases del muñeco segun el numero de errores
         switch(control.getError()){
@@ -51,11 +52,19 @@ public class Ahorcado extends Frame{
               g.drawLine(350, 250, 350, 350);//cuerpo   
             case 3:
               g.drawOval(330, 200, 50, 50);//cabeza
+              
               g.drawString("X", 345, 230);//ojo
               g.drawString("X", 365, 230);//ojo
               g.drawLine(349, 240, 361, 240);//boca   
         }
                 
+        //CAJA ERRORES
+        g.drawLine(600, 100, 600, 550);//VRETICAL
+        g.drawLine(800, 100, 800, 550);//VERTICAL
+        g.drawLine(600, 100, 800, 100);//horizontal
+        g.drawLine(600, 550, 800, 550);//horizontal
+        g.setFont(new Font(null,Font.BOLD,20));
+        g.drawString("ERRORES", 620, 140);//TEXTO ERROR
         
         
        
@@ -68,10 +77,9 @@ public class Ahorcado extends Frame{
        //Para pintar las falladas
        g.setFont(new Font(null,Font.ITALIC,30));
        for(int i=0;i<control.getFalladas().length;i++)
-         g.drawString(Character.toString(control.getFalladas()[i]), control.coordenadas(i)+650,y-500);
-
-        
-    }
+       g.drawString(Character.toString(control.getFalladas()[i]), x+550, control.coordenadas(i)+200);// CARLOS
+       g.drawString(Integer.toString(control.getError()),750, 140);
+  }
     
   
     
