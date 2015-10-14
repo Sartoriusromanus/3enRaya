@@ -1,4 +1,4 @@
-import java.awt.Image;
+
 
 
 /**
@@ -6,15 +6,18 @@ import java.awt.Image;
  * @author angelluis
  */
 public class Modelo {
-   private Image imgApple,imgAndroid;
+  
    private int turno=1;    // 1-> Jugador 1, 2-> Jugador 2
    private int ganador;  //1->Jugador 1, 2-> Jugador 2,3-> Empate
    private String ficha_X="X";
    private String ficha_0="0";
-   private String tablero[][]; //Tablero para las fichas
-    
+   private int ganadasAndroid=0,ganadasApple=0;
+   private String tablero[][]=new String[3][3]; //Tablero para las fichas
+   private boolean fin=false; 
    public Modelo(){
-   
+    for( int i=0 ;i<tablero.length;i++)
+            for ( int j=0; j<tablero.length;j++)
+                tablero[i][j]="";
    }
    //Metodo para jugar de nuevo
    public void jugarOtraVez(){
@@ -24,6 +27,7 @@ public class Modelo {
         
         ganador=0;
         turno=1;
+        
    }    
     //Metodo para poner una ficha
    public int ponerFicha(int x,int y){
@@ -36,9 +40,10 @@ public class Modelo {
                 
               }else
                 ganador=3 ;
-          }else{
+             }else{
                 ganador=1;
-          } 
+                ganadasAndroid++;
+             } 
            
        }else if(turno==2){
            if(puedePoner(x,y)){
@@ -51,10 +56,12 @@ public class Modelo {
                 ganador=3 ;
           }else{
                 ganador=2;
+                ganadasApple++;
           } 
           } 
        }
      }
+       
        return ganador;
    }
     //Metodo para comprobar si la casilla esta vacia   
@@ -135,7 +142,17 @@ public class Modelo {
         return -1;
     }
     
+    public int getGanadasAndroid(){
+        return ganadasAndroid;
+    }
+    
+    public int getGanadasApple(){
+        return ganadasApple;
+    }
 }
+ 
+       
+        
  
        
   
