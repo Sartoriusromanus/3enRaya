@@ -1,0 +1,41 @@
+import java.awt.event.MouseEvent;
+import java.awt.event.MouseListener;
+
+/**
+ *
+ * @author angelluis
+ */
+public class Controlador implements MouseListener{
+    private Vista ventana;
+    private Modelo modelo;
+    public Controlador(Vista ventana,Modelo modelo){
+       this.ventana=ventana;
+       this.modelo=modelo;
+    }
+    @Override
+    public void mouseClicked(MouseEvent me) {
+       int x=modelo.obtenerColumna(me.getX());
+       int y=modelo.obtenerFila(me.getY());
+       if(x>=0 && y>=0)
+        modelo.ponerFicha( x,y);
+        
+    }
+
+    @Override
+    public void mousePressed(MouseEvent me) {
+        
+    }
+
+    @Override
+    public void mouseReleased(MouseEvent me) {
+    }
+
+    @Override
+    public void mouseEntered(MouseEvent me) {
+    }
+
+    @Override
+    public void mouseExited(MouseEvent me) {
+    }
+    
+}
