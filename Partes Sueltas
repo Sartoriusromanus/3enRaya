@@ -1,0 +1,24 @@
+
+//*********PARTES SUELTAS**********//
+
+//-------Empate/Ganador-------//
+int x=2;
+    //En la x iria getganador
+    if(x==3){
+        g.setFont(new Font("Arial", Font.BOLD,20));
+        g.drawString("Empate",670,250);
+         }
+        else{
+            g.setFont(new Font("Arial", Font.BOLD,20));
+            g.drawString("Ganador:",670,220);
+            g.drawString("Jugador "+x,670,245);       
+            }
+
+//---------Boton Jugar---------//
+
+//Boton de volver a jugar
+     Button volverJugar = new Button("Jugar");
+     volverJugar.setFont(new Font("Arial",Font.BOLD,15));
+     volverJugar.setBounds(680, 275, 70, 40);
+     add(volverJugar);
+	 
