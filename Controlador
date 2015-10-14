@@ -12,13 +12,20 @@ public class Controlador implements MouseListener{
        this.ventana=ventana;
        this.modelo=modelo;
     }
+    
     @Override
     public void mouseClicked(MouseEvent me) {
        int x=modelo.obtenerColumna(me.getX());
        int y=modelo.obtenerFila(me.getY());
+       System.out.println("coordenada x"+x+"\ncoordenada y: "+y);
+       int gan=0;
        if(x>=0 && y>=0)
-        modelo.ponerFicha( x,y);
-        
+        gan=modelo.ponerFicha( x,y);
+        if(gan!=0){
+            //Lo que pase cuando se termina la partida
+            
+        }
+        ventana.repaint();
     }
 
     @Override
