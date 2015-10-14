@@ -2,25 +2,25 @@ package vista;
 
 
 
-import java.awt.Color;
+
+import java.awt.Font;
 import java.awt.Frame;
 import java.awt.Graphics;
 import java.awt.Image;
 import java.awt.Label;
-import java.awt.event.KeyEvent;
-import java.awt.event.KeyListener;
 import java.io.IOException;
 import java.net.URL;
-import java.util.logging.Level;
-import java.util.logging.Logger;
 import javax.imageio.ImageIO;
 
-public class Ventana extends Frame  {
-    private Label jugador1,jugador2;
+public class Vista extends Frame  {
+    private Modelo modelo;
+    private Label jugador1,jugador2,marcador,labJugador1,labJugador2,resJ1,resJ2;
     private char tecla;
     private int coorx=7,coory=31;
     private Image casilla,pera,android;
-    public Ventana(){
+    public Vista(){
+        setLayout(null);//Sin diseño
+        
         URL url=this.getClass().getResource("./../Assets/fondo.jpg");
         URL url2=this.getClass().getResource("./../Assets/pera.png");
         URL url3=this.getClass().getResource("./../Assets/android.png");
@@ -33,16 +33,55 @@ public class Ventana extends Frame  {
            System.out.println("Error al cargar ficheroo");
         }
         
+        pintarJugadores();
         
         setVisible(true);
         setSize(816,640);
         setResizable(false);
-
+        
+        
     }
     @Override
     public void paint(Graphics g){
+        pintarMarcador();
         pintarTablero(g);
     }
+    
+    public void pintarJugadores(){
+        jugador1=new Label ("Jugador 1");
+        jugador1.setBounds(670, 150, 100, 15);
+        add(jugador1);
+        
+        jugador2=new Label ("Jugador 2");
+        jugador2.setBounds(670, 295, 100, 15);
+        add(jugador2);
+        
+        
+    }
+    
+    public void pintarMarcador(){
+        marcador=new Label ("Marcador");
+        marcador.setBounds(670, 500, 100, 15);
+        marcador.setFont(new Font(null, Font.BOLD|Font.ITALIC, 20));
+        
+        labJugador1=new Label ("Jugador 1");
+        labJugador1.setBounds(670, 520, 100, 15);
+        labJugador2=new Label ("Jugador 2");
+        labJugador2.setBounds(670, 540, 100, 15);
+        resJ1=new Label ("1");                      //label para enseñar el resultado
+        resJ1.setBounds(700, 520, 100, 15);
+        resJ1.setFont(new Font(null, Font.BOLD|Font.ITALIC, 20));
+        resJ2=new Label ("2");                      //label para enseñar el resultado
+        resJ2.setBounds(700, 540, 100, 15);
+        resJ2.setFont(new Font(null, Font.BOLD|Font.ITALIC, 20));
+        
+        add(marcador);
+        add(labJugador1);
+        add(labJugador2);
+        add(resJ1); //imprimir las ganadas por j1
+        add(resJ2); //imprimir las ganadas por j2
+        
+    } 
     
     public void pintarTablero (Graphics g){
         int x=7,y=31;
@@ -55,6 +94,10 @@ public class Ventana extends Frame  {
             x+=200;
             
         }
+        g.drawImage(casilla, 650,40,100,100,null);
+        g.drawImage(pera, 650,40,100,100,null);
+        g.drawImage(casilla, 650,180,100,100,null);
+        g.drawImage(android, 650,180,100,100, null);
     }
     
 }
