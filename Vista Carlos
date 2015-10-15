@@ -1,0 +1,130 @@
+package vista;
+
+
+
+
+import java.awt.Button;
+import java.awt.Color;
+import java.awt.Font;
+import java.awt.Frame;
+import java.awt.Graphics;
+import java.awt.Image;
+import java.awt.Label;
+import java.io.IOException;
+import java.net.URL;
+import javax.imageio.ImageIO;
+
+public class Vista extends Frame  {
+    private Modelo modelo;
+    private Label jugador1,jugador2,marcador,labJugador1,labJugador2,resJ1,resJ2;
+    private char tecla;
+    private int coorx=7,coory=31;
+    private Image casilla,pera,android;
+    public Vista(){
+        setLayout(null);//Sin diseño
+        
+        URL url=this.getClass().getResource("./../Assets/fondo.jpg");
+        URL url2=this.getClass().getResource("./../Assets/pera.png");
+        URL url3=this.getClass().getResource("./../Assets/android.png");
+        
+        try {
+            casilla=ImageIO.read(url);
+            pera=ImageIO.read(url2);
+            android=ImageIO.read(url3);
+        } catch (IOException ex) {
+           System.out.println("Error al cargar ficheroo");
+        }
+        
+        resJ1=new Label ();                      //label para enseñar el resultado
+        resJ1.setBounds(670, 530, 100, 15);
+        resJ1.setFont(new Font(null, Font.BOLD|Font.ITALIC, 20));
+        resJ2=new Label ();                      //label para enseñar el resultado
+        resJ2.setBounds(670, 570, 100, 15);
+        resJ2.setFont(new Font(null, Font.BOLD|Font.ITALIC, 20));
+        add(resJ1); //imprimir las ganadas por j1
+        add(resJ2); //imprimir las ganadas por j2
+        
+        modelo = new Modelo();
+        Controlador control = new Controlador(this,modelo);
+        this.addMouseListener(control);
+        
+        setVisible(true);
+        setSize(816,640);
+        setResizable(false);
+        
+        
+    }
+    @Override
+    public void paint(Graphics g){
+        pintarJugadores(g);
+        pintarTablero(g);
+        
+    }
+    
+    public void pintarTablero (Graphics g){
+        int x=7,y=31;
+        for(int i =0;i<3;i++){
+            for(int j=0;j<3;j++){
+            g.drawImage(casilla, x,y, null);
+                y+=200;
+            }
+            y=coory;
+            x+=200;
+            
+        }
+        g.drawImage(casilla, 650,40,100,100,null);
+        g.drawImage(pera, 650,40,100,100,null);
+        g.drawImage(casilla, 650,180,100,100,null);
+        g.drawImage(android, 650,180,100,100, null);
+    }
+    
+    public void pintarJugadores(Graphics g){
+        g.drawString("Jugador 1",670,150);
+        g.drawString("Jugador 2",670,295);
+        g.drawString("Marcador",670,500);
+        g.drawString("Jugador 1",670,520);
+        g.drawString("Jugador 2",670,560);
+    
+    }
+    
+    public void resultado(Graphics g){
+    //-------Empate/Ganador-------//
+    int x=2;
+    //En la x iria getganador
+    if(x==3){
+        g.setFont(new Font("Arial", Font.BOLD,20));
+        g.drawString("Empate",670,250);
+         }
+        else{
+            g.setFont(new Font("Arial", Font.BOLD,20));
+            g.drawString("Ganador:",670,220);
+            g.drawString("Jugador "+x,670,245);       
+            }
+
+    //---------Boton Jugar---------//
+
+    //Boton de volver a jugar
+    Button volverJugar = new Button("Jugar");
+    volverJugar.setFont(new Font("Arial",Font.BOLD,15));
+    volverJugar.setBounds(680, 275, 70, 40);
+    add(volverJugar);
+    }
+    
+    public void ponerFicha(int x, int y){
+        
+        //    System.out.print("tu puta madre");
+            
+    }
+    
+    public void pintarFicha(Graphics g, int posicion, int tipo){
+        switch(posicion){
+            case 0:    
+            if(tipo==1)
+                g.drawImage(pera, 0,0,200,200,null);
+            else
+                g.drawImage(android, 0,0,200,200,null);
+            break;    
+        }        
+    }
+    
+}
