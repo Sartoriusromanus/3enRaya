@@ -1,6 +1,5 @@
 
 
-
 /**
  *
  * @author angelluis
@@ -42,7 +41,7 @@ public class Modelo {
                 ganador=3 ;
              }else{
                 ganador=1;
-                ganadasAndroid++;
+                ganadasApple++;
              } 
            
        }else if(turno==2){
@@ -56,7 +55,7 @@ public class Modelo {
                 ganador=3 ;
           }else{
                 ganador=2;
-                ganadasApple++;
+                ganadasAndroid++;
           } 
           } 
        }
@@ -150,7 +149,7 @@ public class Modelo {
         return ganadasApple;
     }
 }
- 
+  
        
         
  
