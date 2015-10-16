@@ -27,8 +27,19 @@ public class Vista extends Frame  {
         } catch (IOException ex) {
            System.out.println("Error al cargar ficheroo");
         }
+        
+        resJ1=new Label ();                      //label para enseñar el resultado
+        resJ1.setBounds(670, 530, 100, 15);
+        resJ1.setFont(new Font(null, Font.BOLD|Font.ITALIC, 20));
+        resJ2=new Label ();                      //label para enseñar el resultado
+        resJ2.setBounds(670, 570, 100, 15);
+        resJ2.setFont(new Font(null, Font.BOLD|Font.ITALIC, 20));
+        add(resJ1); //imprimir las ganadas por j1
+        add(resJ2); //imprimir las ganadas por j2
+        
         this.modelo=modelo;
-        pintarJugadores();
+        Controlador control = new Controlador(this,modelo);
+        this.addMouseListener(control);
         
         setVisible(true);
         setSize(816,640);
@@ -37,22 +48,38 @@ public class Vista extends Frame  {
         
     }
     @Override
-    public void paint(Graphics g){
-        pintarMarcador();
+     public void paint(Graphics g){
+        pintarJugadores(g);
         pintarTablero(g);
-        pintarFichas(g);
+        pintarFicha(g);
+        pintarGanador(g);
+        
     }
     
-    public void pintarJugadores(){
-        jugador1=new Label ("Jugador 1");
-        jugador1.setBounds(670, 150, 100, 15);
-        add(jugador1);
-        
-        jugador2=new Label ("Jugador 2");
-        jugador2.setBounds(670, 295, 100, 15);
-        add(jugador2);
-        
-        
+    public void pintarTablero (Graphics g){
+        int x=7,y=31;
+        for(int i =0;i<3;i++){
+            for(int j=0;j<3;j++){
+            g.drawImage(casilla, x,y, null);
+                y+=200;
+            }
+            y=coory;
+            x+=200;
+            
+        }
+        g.drawImage(casilla, 650,40,100,100,null);
+        g.drawImage(pera, 650,40,100,100,null);
+        g.drawImage(casilla, 650,180,100,100,null);
+        g.drawImage(android, 650,180,100,100, null);
+    }
+    
+    public void pintarJugadores(Graphics g){
+        g.drawString("Jugador 1",670,150);
+        g.drawString("Jugador 2",670,295);
+        g.drawString("Marcador",670,500);
+        g.drawString("Jugador 1",670,520);
+        g.drawString("Jugador 2",670,560);
+    
     }
     
     public void pintarMarcador(){
@@ -78,30 +105,29 @@ public class Vista extends Frame  {
         add(resJ2); //imprimir las ganadas por j2
         
     } 
-    
-    public void pintarTablero (Graphics g){
-        int x=7,y=31;
-        for(int i =0;i<3;i++){
-            for(int j=0;j<3;j++){
-            g.drawImage(casilla, x,y, null);
-                y+=200;
-            }
-            y=coory;
-            x+=200;
-            
-        }
-        g.drawImage(casilla, 650,40,100,100,null);
-        g.drawImage(pera, 650,40,100,100,null);
-        g.drawImage(casilla, 650,180,100,100,null);
-        g.drawImage(android, 650,180,100,100, null);
-    }
-     public void pintarFichas(Graphics g){
-         String[][] tablero=modelo.getTablero();
+
+     public void pintarFicha(Graphics g){
+        String[][] tablero=modelo.getTablero();
+        
          for(int i =0;i<3;i++)
              for(int j=0;j<3;j++)
                  if(tablero[i][j]=="X")
-                     g.drawImage(android, i, j, this);
-                 else if(tablero[i][j]=="0")
-                     g.drawImage(pera,i,j,this);
+                     g.drawImage(pera, modelo.hallarX(i), modelo.hallarY(j), null);
+                 else if(tablero[i][j]=="O")
+                     g.drawImage(android,modelo.hallarX(i), modelo.hallarY(j), null);
+                 
+    }
+     public void pintarGanador(Graphics g){
+         int gan=modelo.getGanador();
+         if(gan==3){
+                g.setFont(new Font("Arial", Font.BOLD,20));
+                g.drawString("Empate",670,250);
+         }
+         else if(gan==2 || gan==1){
+            g.setFont(new Font("Arial", Font.BOLD,20));
+            g.drawString("Ganador:",670,220);
+            g.drawString("Jugador "+gan,670,245);       
+            }
+         
      }
 }
