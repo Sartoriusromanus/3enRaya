@@ -1,8 +1,3 @@
-package vista;
-
-
-
-
 import java.awt.Font;
 import java.awt.Frame;
 import java.awt.Graphics;
@@ -18,7 +13,7 @@ public class Vista extends Frame  {
     private char tecla;
     private int coorx=7,coory=31;
     private Image casilla,pera,android;
-    public Vista(){
+    public Vista(Modelo modelo){
         setLayout(null);//Sin diseño
         
         URL url=this.getClass().getResource("./../Assets/fondo.jpg");
@@ -32,7 +27,7 @@ public class Vista extends Frame  {
         } catch (IOException ex) {
            System.out.println("Error al cargar ficheroo");
         }
-        
+        this.modelo=modelo;
         pintarJugadores();
         
         setVisible(true);
@@ -45,6 +40,7 @@ public class Vista extends Frame  {
     public void paint(Graphics g){
         pintarMarcador();
         pintarTablero(g);
+        pintarFichas(g);
     }
     
     public void pintarJugadores(){
@@ -68,10 +64,10 @@ public class Vista extends Frame  {
         labJugador1.setBounds(670, 520, 100, 15);
         labJugador2=new Label ("Jugador 2");
         labJugador2.setBounds(670, 540, 100, 15);
-        resJ1=new Label ("1");                      //label para enseñar el resultado
+        resJ1=new Label (Integer.toString(modelo.getGanadasApple()));                      //label para enseñar el resultado
         resJ1.setBounds(700, 520, 100, 15);
         resJ1.setFont(new Font(null, Font.BOLD|Font.ITALIC, 20));
-        resJ2=new Label ("2");                      //label para enseñar el resultado
+        resJ2=new Label (Integer.toString(modelo.getGanadasAndroid()));                      //label para enseñar el resultado
         resJ2.setBounds(700, 540, 100, 15);
         resJ2.setFont(new Font(null, Font.BOLD|Font.ITALIC, 20));
         
@@ -99,5 +95,13 @@ public class Vista extends Frame  {
         g.drawImage(casilla, 650,180,100,100,null);
         g.drawImage(android, 650,180,100,100, null);
     }
-    
+     public void pintarFichas(Graphics g){
+         String[][] tablero=modelo.getTablero();
+         for(int i =0;i<3;i++)
+             for(int j=0;j<3;j++)
+                 if(tablero[i][j]=="X")
+                     g.drawImage(android, i, j, this);
+                 else if(tablero[i][j]=="0")
+                     g.drawImage(pera,i,j,this);
+     }
 }
