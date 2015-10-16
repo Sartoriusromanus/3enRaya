@@ -58,6 +58,7 @@ public class Vista extends Frame  {
     public void paint(Graphics g){
         pintarJugadores(g);
         pintarTablero(g);
+        pintarFicha(g);
         
     }
     
@@ -109,22 +110,17 @@ public class Vista extends Frame  {
     volverJugar.setBounds(680, 275, 70, 40);
     add(volverJugar);
     }
-    
-    public void ponerFicha(int x, int y){
+   
+    public void pintarFicha(Graphics g){
+        String[][] tablero=modelo.getTablero();
         
-        //    System.out.print("tu puta madre");
-            
-    }
-    
-    public void pintarFicha(Graphics g, int posicion, int tipo){
-        switch(posicion){
-            case 0:    
-            if(tipo==1)
-                g.drawImage(pera, 0,0,200,200,null);
-            else
-                g.drawImage(android, 0,0,200,200,null);
-            break;    
-        }        
+         for(int i =0;i<3;i++)
+             for(int j=0;j<3;j++)
+                 if(tablero[i][j]=="X")
+                     g.drawImage(android, modelo.hallarX(i), modelo.hallarY(j), null);
+                 else if(tablero[i][j]=="0")
+                     g.drawImage(pera,modelo.hallarX(i), modelo.hallarY(j), null);
+                 
     }
     
 }
