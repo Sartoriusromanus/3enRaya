@@ -1,5 +1,6 @@
 
 
+
 /**
  *
  * @author angelluis
@@ -148,8 +149,34 @@ public class Modelo {
     public int getGanadasApple(){
         return ganadasApple;
     }
-}
-  
+    
+    public int hallarX(int a){
+        int n=0;
+        switch(a){
+            case 0:
+                n=7;
+            case 1:
+                n= 207;
+            case 2:
+                n= 407;
+        }
+        return n;
+    }
+        
+      public int hallarY(int a){
+          int n=0;
+        switch(a){
+            case 0:
+                n= 31;           
+            case 1:
+                n= 231;
+            case 2:
+                n= 431;
+        }
+        return n;
+      }
+    }
+ 
        
         
  
