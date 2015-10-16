@@ -17,14 +17,11 @@ public class Controlador implements MouseListener{
     public void mouseClicked(MouseEvent me) {
        int x=modelo.obtenerColumna(me.getX());
        int y=modelo.obtenerFila(me.getY());
-       System.out.println("coordenada x"+x+"\ncoordenada y: "+y);
-       int gan=0;
-       if(x>=0 && y>=0)
-        gan=modelo.ponerFicha( x,y);
-        if(gan!=0){
-            //Lo que pase cuando se termina la partida
-            
-        }
+       
+       System.out.println(modelo.getTurno());
+       
+        modelo.ponerFicha( x,y);
+        System.out.println(modelo.getGanador());
         ventana.repaint();
     }
 
