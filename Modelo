@@ -1,6 +1,8 @@
 
 
 
+
+
 /**
  *
  * @author angelluis
@@ -10,13 +12,13 @@ public class Modelo {
    private int turno=1;    // 1-> Jugador 1, 2-> Jugador 2
    private int ganador;  //1->Jugador 1, 2-> Jugador 2,3-> Empate
    private String ficha_X="X";
-   private String ficha_0="0";
+   private String ficha_0="O";
    private int ganadasAndroid=0,ganadasApple=0;
    private String tablero[][]=new String[3][3]; //Tablero para las fichas
    private boolean fin=false; 
    public Modelo(){
-    for( int i=0 ;i<tablero.length;i++)
-            for ( int j=0; j<tablero.length;j++)
+    for( int i=0 ;i<3;i++)
+            for ( int j=0; j<3;j++)
                 tablero[i][j]="";
    }
    //Metodo para jugar de nuevo
@@ -33,7 +35,8 @@ public class Modelo {
    public int ponerFicha(int x,int y){
        if(turno==1){
           if(puedePoner(x,y)){
-             tablero[x][y]="X"; 
+             tablero[x][y]="X";
+             
             if(!ganador(ficha_X)){
               if(!empate()){
                 turno=2;
@@ -43,24 +46,24 @@ public class Modelo {
              }else{
                 ganador=1;
                 ganadasApple++;
-             } 
+             }
+          }
            
        }else if(turno==2){
            if(puedePoner(x,y)){
-              tablero[x][y]="0";
+              tablero[x][y]="O";
             if(!ganador(ficha_0)){
               if(!empate()){
-                turno=1;
-                 
+                turno=1;               
               }else
                 ganador=3 ;
           }else{
                 ganador=2;
                 ganadasAndroid++;
-          } 
+               } 
           } 
        }
-     }
+     
        
        return ganador;
    }
@@ -155,10 +158,13 @@ public class Modelo {
         switch(a){
             case 0:
                 n=7;
+                break;
             case 1:
                 n= 207;
+                break;
             case 2:
                 n= 407;
+                break;
         }
         return n;
     }
@@ -167,13 +173,20 @@ public class Modelo {
           int n=0;
         switch(a){
             case 0:
-                n= 31;           
+                n= 31;
+                break;
             case 1:
                 n= 231;
+                break;
             case 2:
                 n= 431;
+                break;
         }
         return n;
+      }
+      
+      public int getGanador(){
+          return ganador;
       }
     }
  
